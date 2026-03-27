@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  active?: boolean;
+}
+
+const { label, active = false } = Astro.props;
+---
+
+<button
+  class:list={[
+    'px-5 py-2 rounded-full border text-xs font-label transition-all',
+    active
+      ? 'border-primary/20 bg-primary/5 text-primary font-bold hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]'
+      : 'border-white/5 bg-surface-container text-on-surface-variant hover:border-secondary/50 hover:text-secondary',
+  ]}
+>
+  {label}
+</button>

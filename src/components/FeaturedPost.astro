@@ -1,0 +1,60 @@
+---
+import { type CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { Share } from '@lucide/astro';
+
+type Props = {
+  post: CollectionEntry<'blog'>;
+};
+
+const { post } = Astro.props;
+---
+
+<div>
+  {
+    post && post.data && (
+      <section class="mb-20">
+        <div class="relative group rounded-3xl overflow-hidden glass-liquid-mesh border border-white/5 shadow-2xl">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity" />
+          <div class="flex flex-col lg:flex-row min-h-[500px]">
+            <div class="lg:w-1/2 relative overflow-hidden">
+              <img
+                alt="Featured Post"
+                class="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                data-alt="Abstract rendering of crystalline structures with glowing blue and purple light refractions, cinematic depth of field, high-tech aesthetic"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfxqkEXkYjxJxXjkBpJGCjvOgoyIso_Ye1Y3jrH2d4SSo_aHW1QMq-2ZmLnHlwubS7fhTt5E-1ElGxG5wcBF60PJBvLV2Ha_ThTF9i0nzMykm8TTAlJxz3NysTRdYuX8J8IFaXXKx3m4leBl83l0DXUzRHv-vqXReIN0N04fTwRfMUy71qfnORDSv5uO2QLnEAmdWlYzbBY07lzCaH6IuvL9VkQRVvDFuunTtRoxV8Z_B_soR-n7ym6YnkU2Kg6xL9-yJrUCM40LU"
+              />
+              <div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent hidden lg:block" />
+            </div>
+            <div class="lg:w-1/2 p-10 md:p-16 flex flex-col justify-center relative z-10 backdrop-blur-sm">
+              <div class="flex items-center gap-3 mb-6">
+                {post.data.pubDate && (
+                  <FormattedDate date={new Date(post.data.pubDate)} />
+                )}
+                <span class="text-on-surface-variant/40 text-xs font-label">
+                  12 MIN READ
+                </span>
+              </div>
+              <h2 class="text-4xl md:text-5xl font-black font-headline tracking-tighter leading-tight mb-6 group-hover:text-primary transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
+                How refraction-based UI patterns are redefining the boundary
+                between data and human interaction in the modern browser.
+              </p>
+              <div class="flex items-center gap-4">
+                <button class="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary font-bold tracking-tight hover:shadow-[0_0_30px_rgba(143,245,255,0.4)] transition-all">
+                  Read
+                </button>
+                <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">
+                  <Share class="w-4 h-4" />
+                  <span class="sr-only">Share this post</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</div>
