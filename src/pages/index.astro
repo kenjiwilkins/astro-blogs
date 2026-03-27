@@ -2,37 +2,247 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import Sidebar from '../components/SideNavigation.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>えくぼもあばた</h1>
-			<p>
-				これはとある文学好きのソフトウェアエンジニアが不定期に書いているブログです。<br/>
-				現時点では日本語のみで書いているので日本語話者以外の方は翻訳ツールなどを使って読んでいただけると嬉しいです。
-			</p>
-			<p>
-				このブログでは基本的には自分が読んだ文学作品についての雑感を短く書いていく予定ですが、たまに文学以外のことも書くかもしれません。<br/>
-				ただどの書籍にしろ紹介する際にネタバレをはらみうる内容の場合は極力その旨を冒頭に明記するようにします。
-			</p>
-			<p>
-				自分が好きな小説家の一例
-			</p>
-			<ul>
-				<li>村上春樹</li>
-				<li>横光利一</li>
-				<li>酉島伝法</li>
-				<li>Don Delillo</li>
-				<li>Cormac McCarthy</li>
-			</ul>
-		</main>
-		<Footer />
-	</body>
+<html lang="ja">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body
+    class="bg-background text-on-surface font-body overflow-x-hidden selection:bg-primary/30"
+  >
+    <Header />
+    <Sidebar />
+    <main
+      class="lg:pl-72 pt-28 px-8 pb-20 relative overflow-hidden min-h-screen"
+    >
+      <!-- Liquid Background Orbs -->
+      <div
+        class="absolute top-20 right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse"
+      >
+      </div>
+      <div
+        class="absolute bottom-20 left-10 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] -z-10"
+      >
+      </div>
+      <div
+        class="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-tertiary/10 rounded-full blur-[80px] -z-10"
+      >
+      </div>
+      <!-- Hero Section -->
+      <section class="mb-24 relative">
+        <div
+          class="glass-card p-12 lg:p-20 rounded-[2.5rem] overflow-hidden relative group gloss-swipe"
+        >
+          <div class="absolute inset-0 liquid-mesh opacity-50 -z-10"></div>
+          <div class="max-w-4xl relative z-10">
+            <span
+              class="font-label text-primary font-bold tracking-[0.3em] uppercase mb-6 block"
+              >Refraction Engine v4.0</span
+            >
+            <h1
+              class="font-headline text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-on-surface"
+            >
+              <span class="text-4xl md:text-6xl lg:text-7xl">世の中は</span
+              ><span
+                class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-tertiary"
+                ><br />えくぼもあばた</span
+              >
+            </h1>
+            <p
+              class="font-body text-xl text-on-surface-variant max-w-2xl mb-12 leading-relaxed"
+            >
+              うらやむ気持ちはあふれたそばから妬みへと腐敗していく。<br />
+            </p>
+            <div class="flex flex-wrap gap-6">
+              <button
+                class="px-10 py-4 bg-gradient-to-r from-primary to-secondary text-on-primary font-headline font-bold rounded-full shadow-[0_0_20px_rgba(0,238,252,0.3)] hover:scale-105 transition-transform relative overflow-hidden"
+              >
+                <span class="relative z-10">読んでみちゃう</span>
+                <div class="absolute top-0 left-0 w-full h-[1px] bg-white/40">
+                </div>
+              </button>
+              <button
+                class="px-10 py-4 font-headline font-bold text-on-surface border border-outline-variant/30 rounded-full hover:bg-surface-bright transition-all"
+              >
+                View Changelog
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Metrics Grid -->
+      <section class="mb-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card p-8 rounded-3xl border-l-4 border-primary">
+            <span class="material-symbols-outlined text-primary mb-4 text-3xl"
+              >bolt</span
+            >
+            <h3
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
+            >
+              Build Speed
+            </h3>
+            <div class="text-4xl font-headline font-black text-on-surface">
+              0.8s
+            </div>
+            <p class="text-xs text-primary-dim mt-2 font-label">
+              Refracted compilation active
+            </p>
+          </div>
+          <div class="glass-card p-8 rounded-3xl border-l-4 border-secondary">
+            <span class="material-symbols-outlined text-secondary mb-4 text-3xl"
+              >analytics</span
+            >
+            <h3
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
+            >
+              Network Uptime
+            </h3>
+            <div class="text-4xl font-headline font-black text-on-surface">
+              99.9%
+            </div>
+            <p class="text-xs text-secondary mt-2 font-label">
+              Global edge redundancy
+            </p>
+          </div>
+          <div class="glass-card p-8 rounded-3xl border-l-4 border-tertiary">
+            <span class="material-symbols-outlined text-tertiary mb-4 text-3xl"
+              >hub</span
+            >
+            <h3
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
+            >
+              Total Transmissions
+            </h3>
+            <div class="text-4xl font-headline font-black text-on-surface">
+              4.2M
+            </div>
+            <p class="text-xs text-tertiary-dim mt-2 font-label">
+              +12% from last cycle
+            </p>
+          </div>
+          <div class="glass-card p-8 rounded-3xl border-l-4 border-primary">
+            <span class="material-symbols-outlined text-primary mb-4 text-3xl"
+              >security</span
+            >
+            <h3
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
+            >
+              Vulnerability Index
+            </h3>
+            <div class="text-4xl font-headline font-black text-on-surface">
+              0.00
+            </div>
+            <p class="text-xs text-primary-dim mt-2 font-label">
+              Encrypted at the glass layer
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Content Grid (Latest Transmissions) -->
+      <section class="mb-24">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <h2
+              class="font-headline text-4xl font-black text-on-surface tracking-tight mb-2"
+            >
+              Latest Transmissions
+            </h2>
+            <p class="text-on-surface-variant font-body">
+              Deep dives into the liquid stack
+            </p>
+          </div>
+          <button
+            class="font-label text-sm text-primary hover:tracking-widest transition-all duration-300 flex items-center gap-2"
+          >
+            VIEW ALL <span class="material-symbols-outlined text-sm"
+              >arrow_forward</span
+            >
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <!-- Featured Card -->
+          <div
+            class="md:col-span-8 group relative overflow-hidden rounded-[2rem]"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"
+            >
+            </div>
+            <img
+              class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
+              data-alt="cinematic space nebula in deep blues and violets with high energy light particles"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QB8qdNnRcbK1Ye0yHL_Nj39OX4EBslQ0z243DLhKAjvVzocyM5TSZQ_VpHTYl5DzqVl5iRavdId_MoGM3t3LkzVbKngc5t2TcArhZRmaDMs_WBdxOS5SIJVHawmjlJnd4JFNSY6msO7hItjWRPdX2GmALeZZvN4Ustbqh-Jq9H5nrzLlnbXWrE9Q0kjYvhsZfdZ8sTizCQ7XgLBU5qEB0iIv1kBW9Jr7_FuHBsDJFAi-_AFjC8sJCnAxJmIWiH-TqN55K3nMySw"
+            />
+            <div class="absolute bottom-0 left-0 p-10 z-20">
+              <span
+                class="bg-primary/20 backdrop-blur-md text-primary font-label text-xs px-3 py-1 rounded-full mb-4 inline-block"
+                >ENGINEERING</span
+              >
+              <h3
+                class="font-headline text-4xl font-bold text-white mb-4 leading-tight"
+              >
+                Mastering Tonal Layering in Modern CSS Interface Design
+              </h3>
+              <p class="text-on-surface/80 max-w-xl mb-6 font-body">
+                Exploring the shift from standard drop-shadows to high-precision
+                tonal brightness shifts for depth.
+              </p>
+              <button
+                class="flex items-center gap-3 font-headline font-bold text-white group-hover:gap-5 transition-all"
+              >
+                Read transmission <span class="material-symbols-outlined"
+                  >east</span
+                >
+              </button>
+            </div>
+          </div>
+          <!-- Secondary Cards Stack -->
+          <div class="md:col-span-4 flex flex-col gap-8">
+            <div class="glass-card p-6 rounded-3xl flex flex-col gap-4 group">
+              <div class="h-40 rounded-2xl overflow-hidden">
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  data-alt="retro futuristic workspace with vibrant magenta lighting and glass hardware"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFNqE2Ldhr7A9IDs5ojjfd3cjCegolZxlS4ia2tUg8R9duHVmuzDqErtOG6J-Yn5WFL2CDygxHzwnhZS0Y8Mg_cQw899ILWr21AVn_04jO6iI2RJ9Bkhls5flCuBB6VLiSEAiWiwLtHTwfk0up8KjHjC-HoqFtfBMVNlm2P5M5d_7907RemiDharDJ_59GcAHVKX9CJwVwuo7KInlyF2AlylerW2H7znt7X6fbS0TyxwRbCKoYaFX1CcmD98ONatu_wnm7Pt12_Zk"
+                />
+              </div>
+              <div>
+                <span
+                  class="text-secondary font-label text-[10px] tracking-widest uppercase mb-1 block"
+                  >Tutorials</span
+                >
+                <h4 class="font-headline font-bold text-lg text-on-surface">
+                  The Monospace Manifesto
+                </h4>
+              </div>
+            </div>
+            <div class="glass-card p-6 rounded-3xl flex flex-col gap-4 group">
+              <div class="h-40 rounded-2xl overflow-hidden">
+                <img
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  data-alt="macro circuit board photography with glowing neon circuit paths"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Bs9vv69fyE5fmNR8b96dPFVhtot7zg87jjredRFCitSmRX3MF5Ld7t8YKdqpqzBIt53U1-UqZcs5T34Jbzk37uvir44CHln2yv3acYYNvOsyTdsTdUhDXDbIbPWCd5u-XIRYFKH3onBgdI2GCcfHrMg27Agj91sUuVMve-JgExtsINj4klQnV0hTeG2GpikGlSVPASrId2MvVRZH4FIo-wPeZwV429FeW3fIHMhce1tQP6dCiGkrEiQntoDhLYSjA8HAOAshExs"
+                />
+              </div>
+              <div>
+                <span
+                  class="text-tertiary font-label text-[10px] tracking-widest uppercase mb-1 block"
+                  >Labs</span
+                >
+                <h4 class="font-headline font-bold text-lg text-on-surface">
+                  Micro-frontend Refraction
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>

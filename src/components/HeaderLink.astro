@@ -7,18 +7,15 @@ const { href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const baseClasses =
+  'text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors font-headline tracking-tight';
+const activeClasses = 'text-[#00F0FF] border-b-2 border-[#00F0FF] pb-1 ';
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+<a
+  href={href}
+  class={`${baseClasses} ${isActive ? activeClasses : ''}`}
+  {...props}
+>
+  <slot />
 </a>
-<style>
-	a {
-		display: inline-block;
-		text-decoration: none;
-	}
-	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
-	}
-</style>
