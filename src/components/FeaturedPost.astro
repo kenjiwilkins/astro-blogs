@@ -38,10 +38,11 @@ const { post } = Astro.props;
               <h2 class="text-4xl md:text-5xl font-black font-headline tracking-tighter leading-tight mb-6 group-hover:text-primary transition-colors">
                 {post.data.title}
               </h2>
-              <p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
-                How refraction-based UI patterns are redefining the boundary
-                between data and human interaction in the modern browser.
-              </p>
+              {post.data.description && (
+                <p class="text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
+                  {post.data.description}
+                </p>
+              )}
               <div class="flex items-center gap-4">
                 <button class="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary font-bold tracking-tight hover:shadow-[0_0_30px_rgba(143,245,255,0.4)] transition-all">
                   Read

@@ -1,0 +1,44 @@
+---
+interface Props {
+  icon: string;
+  label: string;
+  value: string;
+  note: string;
+  color: 'primary' | 'secondary' | 'tertiary';
+}
+
+const { icon, label, value, note, color } = Astro.props;
+
+const colorMap = {
+  primary: {
+    border: 'border-primary',
+    icon: 'text-primary',
+    note: 'text-primary-dim',
+  },
+  secondary: {
+    border: 'border-secondary',
+    icon: 'text-secondary',
+    note: 'text-secondary',
+  },
+  tertiary: {
+    border: 'border-tertiary',
+    icon: 'text-tertiary',
+    note: 'text-tertiary-dim',
+  },
+};
+
+const colors = colorMap[color];
+---
+
+<div class:list={['glass-card p-8 rounded-3xl border-l-4', colors.border]}>
+  <span class:list={['material-symbols-outlined mb-4 text-3xl', colors.icon]}>
+    {icon}
+  </span>
+  <h3
+    class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
+  >
+    {label}
+  </h3>
+  <div class="text-4xl font-headline font-black text-on-surface">{value}</div>
+  <p class:list={['text-xs mt-2 font-label', colors.note]}>{note}</p>
+</div>

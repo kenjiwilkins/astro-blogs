@@ -4,20 +4,19 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Aether Glass | Refracted Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: 'class',
@@ -59,7 +58,7 @@
               'on-tertiary-container': '#0e000a',
               'tertiary-fixed': '#ff87db',
               'tertiary-dim': '#ff5dd7',
-              'inverse-on-surface': '#4f5561',
+              'inverse-on-surface': '#4f5551',
               'primary-fixed': '#00eefc',
               'on-tertiary-fixed': '#34002a',
               'surface-bright': '#222d3b',
@@ -76,6 +75,11 @@
               'secondary-fixed-dim': '#ceb9ff',
               'on-surface': '#e8eefc',
             },
+            fontFamily: {
+              headline: ['Lexend'],
+              body: ['Inter'],
+              label: ['Space Grotesk'],
+            },
             borderRadius: {
               DEFAULT: '0.25rem',
               lg: '0.5rem',
@@ -87,501 +91,482 @@
       };
     </script>
     <style>
-      .glass-card {
-        background: rgba(29, 38, 52, 0.4);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(143, 245, 255, 0.1);
-      }
-      .liquid-mesh {
-        background:
-          radial-gradient(
-            circle at 20% 30%,
-            rgba(0, 238, 252, 0.15) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 70%,
-            rgba(172, 137, 255, 0.15) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 50% 50%,
-            rgba(255, 93, 215, 0.1) 0%,
-            transparent 70%
-          );
-      }
-      .gloss-swipe::after {
-        content: '';
-        position: absolute;
-        top: -100%;
-        left: -100%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-          45deg,
-          transparent 45%,
-          rgba(255, 255, 255, 0.05) 50%,
-          transparent 55%
-        );
-        transition: all 0.6s;
-      }
-      .gloss-swipe:hover::after {
-        top: 0;
-        left: 0;
-      }
       .material-symbols-outlined {
         font-variation-settings:
           'FILL' 0,
           'wght' 400,
           'GRAD' 0,
           'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+      }
+      .liquid-mesh {
+        background:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(143, 245, 255, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(172, 137, 255, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 93, 215, 0.05) 0%,
+            transparent 60%
+          );
+      }
+      .glass-panel {
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .gloss-swipe:hover::after {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.05) 45%,
+          rgba(255, 255, 255, 0.1) 50%,
+          rgba(255, 255, 255, 0.05) 55%,
+          transparent 100%
+        );
+        transform: rotate(25deg);
+        pointer-events: none;
       }
     </style>
   </head>
   <body
-    class="bg-background text-on-surface font-body overflow-x-hidden selection:bg-primary/30"
+    class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen"
   >
-    <!-- Navigation Shell -->
-    <header
+    <!-- TopNavBar -->
+    <nav
       class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-surface/60 backdrop-blur-xl dark:bg-[#080f18]/60 shadow-[0_0_30px_0_rgba(0,240,255,0.05)]"
     >
-      <div class="flex items-center gap-8">
+      <div class="flex items-center gap-12">
         <span
           class="text-2xl font-black text-[#00F0FF] tracking-tighter font-headline"
           >Aether Glass</span
         >
-        <nav class="hidden md:flex gap-6">
+        <div class="hidden md:flex gap-8">
           <a
-            class="text-[#00F0FF] border-b-2 border-[#00F0FF] pb-1 font-headline tracking-tight"
+            class="font-lexend tracking-tight text-[#00F0FF] border-b-2 border-[#00F0FF] pb-1"
             href="#"
             >Articles</a
           >
           <a
-            class="text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors font-headline tracking-tight"
+            class="font-lexend tracking-tight text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors"
             href="#"
             >Tutorials</a
           >
           <a
-            class="text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors font-headline tracking-tight"
+            class="font-lexend tracking-tight text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors"
             href="#"
             >Labs</a
           >
           <a
-            class="text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors font-headline tracking-tight"
+            class="font-lexend tracking-tight text-on-surface-variant/70 hover:text-[#00F0FF] transition-colors"
             href="#"
             >Manifesto</a
           >
-        </nav>
+        </div>
       </div>
       <div class="flex items-center gap-4">
         <div
-          class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20"
+          class="bg-surface-container-high/40 rounded-full px-4 py-2 flex items-center gap-3 border border-white/5"
         >
-          <span
-            class="material-symbols-outlined text-on-surface-variant/50 text-sm"
+          <span class="material-symbols-outlined text-on-surface-variant/50"
             >search</span
           >
           <input
-            class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-on-surface-variant/30"
-            placeholder="Explore transmissions..."
+            class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder-on-surface-variant/40 w-48"
+            placeholder="Search..."
             type="text"
           />
         </div>
-        <button
-          class="text-on-surface-variant hover:text-[#00F0FF] transition-all"
+        <span class="material-symbols-outlined text-2xl text-[#00F0FF]"
+          >account_circle</span
         >
-          <span
-            class="material-symbols-outlined"
-            style="font-variation-settings: 'FILL' 1"
-            >account_circle</span
-          >
-        </button>
       </div>
       <div
         class="absolute bottom-0 left-0 w-full bg-gradient-to-b from-white/10 to-transparent h-[1px]"
       ></div>
-    </header>
-    <!-- Side Navigation (Desktop Only) -->
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="relative pt-32 pb-40 px-6 max-w-7xl mx-auto liquid-mesh">
+      <!-- Post Header Section -->
+      <header class="mb-12 flex flex-col items-center text-center">
+        <div class="flex items-center gap-4 mb-6">
+          <span
+            class="font-label text-xs uppercase tracking-[0.3em] text-secondary py-1 px-3 bg-secondary/10 rounded-full border border-secondary/20"
+            >Engineering</span
+          >
+          <span
+            class="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant/60"
+            >6 MIN READ</span
+          >
+          <div class="w-[1px] h-3 bg-white/10 mx-2"></div>
+          <button
+            class="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group group-active:scale-95"
+          >
+            <span
+              class="material-symbols-outlined text-[14px] text-primary group-hover:animate-pulse transition-all"
+              >content_copy</span
+            ><span
+              class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/80 group-hover:text-primary transition-colors"
+              >RSS</span
+            >
+          </button>
+        </div>
+        <h1
+          class="font-headline text-5xl md:text-7xl font-black text-on-surface tracking-tighter leading-[0.9] max-w-4xl mb-8"
+        >
+          The Architecture of
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+            >Submerged Interfaces</span
+          >
+        </h1>
+        <div class="flex items-center gap-6 text-on-surface-variant/80 mb-12">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full overflow-hidden border border-primary/30"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="portrait of a focused software architect with glasses in a dimly lit studio with neon blue accents"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqSerVFLK7PZ7VtPxOQ5NMGMErQV9zz_Av44l5eeOQ6633zv9o_fWUBwq9Ih7_xu6jH8lzMXxaINIPFc4oJWNrc8DtCPBqrNpLIFZPkiKhT5xLP1dzqxQip2UV5Hxkgo_0E6XRsBqX6qSfPnNpmezIj9kpurcMMQcn6sJqDEPk8Tv-X-pnXXNBn0Tz8lwnvGkrz65QEbNMBecHh7GAKxDgjQCCCSUKDcppA5lILsXJTCTKgJYJ5mq3Mf1mns0Vj7tJyPoD_tWFAJs"
+              />
+            </div>
+            <span class="font-label font-bold text-sm tracking-tight"
+              >Kaelen Vance</span
+            >
+          </div>
+          <div class="w-[1px] h-4 bg-outline-variant/30"></div>
+          <span class="font-label text-sm uppercase tracking-widest"
+            >October 24, 2024</span
+          >
+        </div>
+        <!-- Hero Image Section -->
+        <div class="w-full max-w-5xl mx-auto mb-20 relative group">
+          <div
+            class="absolute -inset-4 bg-gradient-to-r from-primary/10 to-secondary/10 blur-3xl opacity-50"
+          ></div>
+          <div
+            class="relative glass-panel bg-white/5 p-3 rounded-[3rem] shadow-2xl overflow-hidden"
+          >
+            <div
+              class="relative rounded-[2.25rem] overflow-hidden border border-white/10"
+            >
+              <img
+                class="w-full aspect-[21/9] object-cover hover:scale-[1.02] transition-transform duration-1000 ease-out"
+                data-alt="high-tech futuristic digital architecture with glowing blue and purple light paths and translucent glass structures"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbsMHiq1wk33E92nL9TpRTxpTktPvXDfYp7oXB1SZAsvcbJyXas124aHETXL1XdA_Un5aCdwvhsY_SdBPdpVvdB1R5NcClga1RAykBlOd5PKXlXhB1zubYbIwrjudVklB9VklLEYcuDclPqbBmjWyN0nYjJ-bPCFnIrpkNuFYKiw9zOwY4New9xY4pzPzeWvf9uQrStasaoeUe72OUDUeXLI6qLUannGMcr8embEA3hEDW9RpAg1R5-AIvAWxUbZTQ-co_UN66_yg"
+              />
+              <div
+                class="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[2.25rem] pointer-events-none"
+              ></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- The Large Translucent Post Panel -->
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <!-- Decorative Blobs behind the panel -->
+        <div
+          class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse"
+        ></div>
+        <div
+          class="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[120px]"
+        ></div>
+        <article
+          class="glass-panel bg-surface-variant/40 rounded-[2.5rem] p-12 md:p-20 shadow-2xl relative overflow-hidden group"
+        >
+          <div
+            class="prose prose-invert prose-lg max-w-none text-on-surface-variant leading-relaxed font-body"
+          >
+            <p
+              class="text-xl md:text-2xl text-on-surface font-light mb-12 leading-relaxed"
+            >
+              In the evolution of frontend development, we have moved past the
+              era of flat cards and sharp borders. The future belongs to depth,
+              refraction, and the sensation of digital elements existing within
+              a physical medium.
+            </p>
+            <h2
+              class="font-headline text-3xl font-bold text-on-surface mt-16 mb-6"
+            >
+              Liquid Composability
+            </h2>
+            <p class="mb-8">
+              The core philosophy of 'Aether Glass' is the rejection of the 1px
+              divider. Instead, we define boundaries through tonal shifts and
+              light refraction. When elements overlap, they shouldn't simply sit
+              on top; they should distort the layer beneath. This is achieved
+              using high-intensity backdrop blurs and subtle gradient meshes.
+            </p>
+            <!-- Embedded Media Example -->
+            <figure class="my-16 -mx-6 md:-mx-12">
+              <div
+                class="aspect-video rounded-3xl overflow-hidden border border-white/10 relative group/img"
+              >
+                <img
+                  class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
+                  data-alt="abstract 3d render of glass spheres floating over a liquid purple and blue surface with soft depth of field"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqrOnjwXrj1RvI_5L6OzTf3HwqtGqL3rgstw8clEkJspE-GlTJuK9ah0ip_ridTnt7fD_SiKNW_ssmx9_0WRVQjMRXwZ6auG-UASQDOpaYLU1qQBdZ81keoE4uZukCvMnS0zSNrpBa_QgoGLFXFUCJSz_l7LeMY8K3_f2qG0MBZX29tmBEaAEv3lQHDIWPN9yeMXU8cmC078FNbY6M4qsSFVzpEB12ESwYyPoxAG7lUnBA7nDkVm52s9ULLGd5U_ZGR42aplmgwBI"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-60"
+                ></div>
+                <figcaption
+                  class="absolute bottom-6 left-8 font-label text-xs uppercase tracking-[0.2em] text-primary"
+                >
+                  Fig 01: Refraction studies in WebGL
+                </figcaption>
+              </div>
+            </figure>
+            <p class="mb-8">
+              Consider the implementation of our "Liquid Capsule" buttons. By
+              applying a 1px white inner-glow at the top edge, we simulate the
+              polished rim of a glass bead. It's these micro-details that
+              transform a standard UI into a high-end editorial experience.
+            </p>
+            <!-- Code Block: The Submerged Terminal -->
+            <div class="my-12 relative">
+              <div
+                class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-lg"
+              ></div>
+              <div
+                class="relative bg-surface-container-lowest/80 rounded-xl p-8 border border-white/5 font-mono text-sm overflow-hidden"
+              >
+                <div class="flex gap-2 mb-6">
+                  <div class="w-3 h-3 rounded-full bg-error/40"></div>
+                  <div class="w-3 h-3 rounded-full bg-secondary/40"></div>
+                  <div class="w-3 h-3 rounded-full bg-primary/40"></div>
+                </div>
+                <pre
+                  class="text-primary-dim"
+                ><code class="block leading-relaxed"><span class="text-secondary">const</span> <span class="text-on-surface">refractionEngine</span> = () =&gt; {
+  <span class="text-secondary">return</span> <span class="text-on-surface">view</span>.<span class="text-primary">compose</span>({
+    blur: <span class="text-tertiary">20</span>,
+    liquid: <span class="text-secondary">true</span>,
+    depth: <span class="text-tertiary">"infinite"</span>
+  });
+};</code></pre>
+                <!-- Liquid mesh glow in corner -->
+                <div
+                  class="absolute bottom-0 right-0 w-32 h-32 bg-secondary/10 blur-[40px] rounded-full -mr-10 -mb-10"
+                ></div>
+              </div>
+            </div>
+            <h2
+              class="font-headline text-3xl font-bold text-on-surface mt-16 mb-6"
+            >
+              The Verticality of Space
+            </h2>
+            <p>
+              By leveraging the Spacing Scale—specifically levels 16 and 20—we
+              create "Airy" luxury. The developer reading this isn't just
+              consuming information; they are navigating an environment. The
+              asymmetric placement of headers overlapping glass panels creates a
+              physical stacking order that feels intentional and premium.
+            </p>
+          </div>
+          <!-- Article Tags -->
+          <div class="mt-20 pt-12 border-t border-white/5 flex flex-wrap gap-4">
+            <a
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 hover:text-primary transition-colors px-4 py-2 bg-surface-container-high/40 rounded-full border border-white/5"
+              href="#"
+              >UI Design</a
+            >
+            <a
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 hover:text-primary transition-colors px-4 py-2 bg-surface-container-high/40 rounded-full border border-white/5"
+              href="#"
+              >Architecture</a
+            >
+            <a
+              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 hover:text-primary transition-colors px-4 py-2 bg-surface-container-high/40 rounded-full border border-white/5"
+              href="#"
+              >WebGL</a
+            >
+          </div>
+        </article>
+        <!-- Navigation: Glass-morphic Pagination -->
+        <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <button
+            class="relative group gloss-swipe overflow-hidden text-left glass-panel bg-surface-variant/20 p-8 rounded-3xl hover:bg-surface-variant/40 transition-all duration-500 border border-white/5"
+          >
+            <span
+              class="font-label text-[10px] uppercase tracking-[0.4em] text-secondary mb-4 block"
+              >Previous Article</span
+            >
+            <span
+              class="font-headline text-xl font-bold text-on-surface group-hover:text-primary transition-colors flex items-center gap-4"
+            >
+              <span
+                class="material-symbols-outlined transition-transform group-hover:-translate-x-2"
+                >arrow_back</span
+              >
+              Micro-interactions in Liquid Systems
+            </span>
+            <!-- Liquid hover effect element -->
+            <div
+              class="absolute -bottom-10 -right-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"
+            ></div>
+          </button>
+          <button
+            class="relative group gloss-swipe overflow-hidden text-right glass-panel bg-surface-variant/20 p-8 rounded-3xl hover:bg-surface-variant/40 transition-all duration-500 border border-white/5"
+          >
+            <span
+              class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-4 block"
+              >Next Article</span
+            >
+            <span
+              class="font-headline text-xl font-bold text-on-surface group-hover:text-secondary transition-colors flex items-center justify-end gap-4"
+            >
+              The Death of the Card Component
+              <span
+                class="material-symbols-outlined transition-transform group-hover:translate-x-2"
+                >arrow_forward</span
+              >
+            </span>
+            <!-- Liquid hover effect element -->
+            <div
+              class="absolute -top-10 -left-10 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"
+            ></div>
+          </button>
+        </div>
+      </div>
+    </main>
+    <!-- SideNavBar (Suppressed on mobile, fixed on LG) -->
     <aside
       class="fixed left-0 top-20 w-64 z-40 hidden lg:flex flex-col bg-surface-container-low/40 backdrop-blur-2xl dark:bg-[#0c141e]/40 rounded-r-3xl h-[calc(100vh-2rem)] my-4 border-r border-white/5 shadow-2xl shadow-cyan-900/10"
     >
-      <div class="p-6 mb-8 flex items-center gap-3">
-        <div
-          class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary p-[1px]"
-        >
+      <div class="p-8 pb-4">
+        <div class="flex items-center gap-4 mb-2">
           <div
-            class="w-full h-full rounded-full bg-surface-container overflow-hidden"
+            class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary p-[1px]"
           >
-            <img
-              class="w-full h-full object-cover"
-              data-alt="professional male portrait with soft neon blue lighting and high tech background"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP96iTNntPY7SpGgFnGmJ4MMkvEQkraHvSGhjaRgwT-dYqMVeYYwO511zm_FtfnBceEvkRXK4cUySVqrFjMw_PaN77iUaR0r93IzfZ_wSmYtIH4o1FN7Pqx4792u09dDh63i0Q6owa-vKCo52gRO6uUVWYcF4GIfww-LQBbNdn9o6Fybp_UJ5n-IoeoiTV1tJgLvoaOByjHU-QuihaK-NZmDjm5iVZmJ3R2ilySreIFN3sXtti4Zd1ekYaeM180I6S9G5j3j8pmzo"
-            />
+            <div
+              class="w-full h-full bg-background rounded-[11px] flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-primary text-xl"
+                >blur_on</span
+              >
+            </div>
+          </div>
+          <div>
+            <h3
+              class="font-headline text-sm font-bold text-on-surface tracking-tight"
+            >
+              Refracted Dev
+            </h3>
+            <p
+              class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant/60"
+            >
+              Senior Architect
+            </p>
           </div>
         </div>
-        <div>
-          <h4 class="font-headline font-bold text-sm text-secondary">
-            Refracted Dev
-          </h4>
-          <p
-            class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider"
-          >
-            Senior Architect
-          </p>
-        </div>
       </div>
-      <nav class="flex flex-col gap-1 px-2">
+      <div class="flex-1 flex flex-col gap-1 px-4 mt-8">
         <a
-          class="flex items-center gap-3 bg-gradient-to-r from-[#00F0FF]/20 to-transparent text-[#00F0FF] border-l-4 border-[#00F0FF] px-4 py-3 font-headline text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
+          class="flex items-center gap-3 bg-gradient-to-r from-[#00F0FF]/20 to-transparent text-[#00F0FF] border-l-4 border-[#00F0FF] px-4 py-3 font-lexend text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
           href="#"
         >
           <span class="material-symbols-outlined">dynamic_feed</span>
           Feed
         </a>
         <a
-          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-headline text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
+          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-lexend text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
           href="#"
         >
           <span class="material-symbols-outlined">code</span>
           Snippets
         </a>
         <a
-          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-headline text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
+          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-lexend text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
           href="#"
         >
           <span class="material-symbols-outlined">edit_note</span>
           Drafts
         </a>
         <a
-          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-headline text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
+          class="flex items-center gap-3 text-on-surface-variant/60 px-4 py-3 font-lexend text-sm font-medium hover:bg-white/5 hover:translate-x-1 transition-all"
           href="#"
         >
           <span class="material-symbols-outlined">settings</span>
           Settings
         </a>
-      </nav>
-    </aside>
-    <main
-      class="lg:pl-72 pt-28 px-8 pb-20 relative overflow-hidden min-h-screen"
-    >
-      <!-- Liquid Background Orbs -->
-      <div
-        class="absolute top-20 right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse"
-      ></div>
-      <div
-        class="absolute bottom-20 left-10 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] -z-10"
-      ></div>
-      <div
-        class="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-tertiary/10 rounded-full blur-[80px] -z-10"
-      ></div>
-      <!-- Hero Section -->
-      <section class="mb-24 relative">
+      </div>
+      <div class="p-8">
         <div
-          class="glass-card p-12 lg:p-20 rounded-[2.5rem] overflow-hidden relative group gloss-swipe"
+          class="bg-surface-container-high p-4 rounded-2xl border border-white/5"
         >
-          <div class="absolute inset-0 liquid-mesh opacity-50 -z-10"></div>
-          <div class="max-w-4xl relative z-10">
-            <span
-              class="font-label text-primary font-bold tracking-[0.3em] uppercase mb-6 block"
-              >Refraction Engine v4.0</span
-            >
-            <h1
-              class="font-headline text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-on-surface"
-            >
-              The Future is
-              <span
-                class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-tertiary"
-                >Liquidly Defined.</span
-              >
-            </h1>
-            <p
-              class="font-body text-xl text-on-surface-variant max-w-2xl mb-12 leading-relaxed"
-            >
-              Step into a high-precision ecosystem built for the refracted
-              developer. Translucent interfaces, organic data flows, and
-              uncompromised performance.
-            </p>
-            <div class="flex flex-wrap gap-6">
-              <button
-                class="px-10 py-4 bg-gradient-to-r from-primary to-secondary text-on-primary font-headline font-bold rounded-full shadow-[0_0_20px_rgba(0,238,252,0.3)] hover:scale-105 transition-transform relative overflow-hidden"
-              >
-                <span class="relative z-10">Initialize Shell</span>
-                <div
-                  class="absolute top-0 left-0 w-full h-[1px] bg-white/40"
-                ></div>
-              </button>
-              <button
-                class="px-10 py-4 font-headline font-bold text-on-surface border border-outline-variant/30 rounded-full hover:bg-surface-bright transition-all"
-              >
-                View Changelog
-              </button>
-            </div>
-          </div>
-          <div
-            class="absolute bottom-[-10%] right-[-5%] w-[40%] hidden lg:block opacity-40 group-hover:opacity-60 transition-opacity"
-          >
-            <img
-              class="w-full h-full object-contain rotate-12"
-              data-alt="abstract 3d glass sphere reflecting vibrant neon lights with complex internal refractions"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWvjbXBDNBxVMau4C_gpfs-I5ckyOkFRdZf3XYY5Lk9pCKXCwbr14OOIt1P9HdNxIj8APOwPho3L5pIrFNg2_FMRnt-RGrC-jiYUedyR6S1rrfII2Q0p-GetfzEzfTfDEIKhmYKbdj-_8H8YGgjN5mnt4Lgo2MK9aXwFm1ObqdhmzAtSAp97FE93ncC1_BjDk-JAr6soyfpTutVUp7oDOYUCIdnN3hAuvHfmVI_H3k9iuNRlKSHo1UaKReU250Tv-uK6l3iex5r9Q"
-            />
-          </div>
-        </div>
-      </section>
-      <!-- Metrics Grid -->
-      <section class="mb-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-card p-8 rounded-3xl border-l-4 border-primary">
-            <span class="material-symbols-outlined text-primary mb-4 text-3xl"
-              >bolt</span
-            >
-            <h3
-              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
-            >
-              Build Speed
-            </h3>
-            <div class="text-4xl font-headline font-black text-on-surface">
-              0.8s
-            </div>
-            <p class="text-xs text-primary-dim mt-2 font-label">
-              Refracted compilation active
-            </p>
-          </div>
-          <div class="glass-card p-8 rounded-3xl border-l-4 border-secondary">
-            <span class="material-symbols-outlined text-secondary mb-4 text-3xl"
-              >analytics</span
-            >
-            <h3
-              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
-            >
-              Network Uptime
-            </h3>
-            <div class="text-4xl font-headline font-black text-on-surface">
-              99.9%
-            </div>
-            <p class="text-xs text-secondary mt-2 font-label">
-              Global edge redundancy
-            </p>
-          </div>
-          <div class="glass-card p-8 rounded-3xl border-l-4 border-tertiary">
-            <span class="material-symbols-outlined text-tertiary mb-4 text-3xl"
-              >hub</span
-            >
-            <h3
-              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
-            >
-              Total Transmissions
-            </h3>
-            <div class="text-4xl font-headline font-black text-on-surface">
-              4.2M
-            </div>
-            <p class="text-xs text-tertiary-dim mt-2 font-label">
-              +12% from last cycle
-            </p>
-          </div>
-          <div class="glass-card p-8 rounded-3xl border-l-4 border-primary">
-            <span class="material-symbols-outlined text-primary mb-4 text-3xl"
-              >security</span
-            >
-            <h3
-              class="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 mb-2"
-            >
-              Vulnerability Index
-            </h3>
-            <div class="text-4xl font-headline font-black text-on-surface">
-              0.00
-            </div>
-            <p class="text-xs text-primary-dim mt-2 font-label">
-              Encrypted at the glass layer
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- Content Grid (Latest Transmissions) -->
-      <section class="mb-24">
-        <div class="flex items-end justify-between mb-12">
-          <div>
-            <h2
-              class="font-headline text-4xl font-black text-on-surface tracking-tight mb-2"
-            >
-              Latest Transmissions
-            </h2>
-            <p class="text-on-surface-variant font-body">
-              Deep dives into the liquid stack
-            </p>
-          </div>
-          <button
-            class="font-label text-sm text-primary hover:tracking-widest transition-all duration-300 flex items-center gap-2"
-          >
-            VIEW ALL
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </button>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <!-- Featured Card -->
-          <div
-            class="md:col-span-8 group relative overflow-hidden rounded-[2rem]"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"
-            ></div>
-            <img
-              class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
-              data-alt="cinematic space nebula in deep blues and violets with high energy light particles"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QB8qdNnRcbK1Ye0yHL_Nj39OX4EBslQ0z243DLhKAjvVzocyM5TSZQ_VpHTYl5DzqVl5iRavdId_MoGM3t3LkzVbKngc5t2TcArhZRmaDMs_WBdxOS5SIJVHawmjlJnd4JFNSY6msO7hItjWRPdX2GmALeZZvN4Ustbqh-Jq9H5nrzLlnbXWrE9Q0kjYvhsZfdZ8sTizCQ7XgLBU5qEB0iIv1kBW9Jr7_FuHBsDJFAi-_AFjC8sJCnAxJmIWiH-TqN55K3nMySw"
-            />
-            <div class="absolute bottom-0 left-0 p-10 z-20">
-              <span
-                class="bg-primary/20 backdrop-blur-md text-primary font-label text-xs px-3 py-1 rounded-full mb-4 inline-block"
-                >ENGINEERING</span
-              >
-              <h3
-                class="font-headline text-4xl font-bold text-white mb-4 leading-tight"
-              >
-                Mastering Tonal Layering in Modern CSS Interface Design
-              </h3>
-              <p class="text-on-surface/80 max-w-xl mb-6 font-body">
-                Exploring the shift from standard drop-shadows to high-precision
-                tonal brightness shifts for depth.
-              </p>
-              <button
-                class="flex items-center gap-3 font-headline font-bold text-white group-hover:gap-5 transition-all"
-              >
-                Read transmission
-                <span class="material-symbols-outlined">east</span>
-              </button>
-            </div>
-          </div>
-          <!-- Secondary Cards Stack -->
-          <div class="md:col-span-4 flex flex-col gap-8">
-            <div class="glass-card p-6 rounded-3xl flex flex-col gap-4 group">
-              <div class="h-40 rounded-2xl overflow-hidden">
-                <img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  data-alt="retro futuristic workspace with vibrant magenta lighting and glass hardware"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFNqE2Ldhr7A9IDs5ojjfd3cjCegolZxlS4ia2tUg8R9duHVmuzDqErtOG6J-Yn5WFL2CDygxHzwnhZS0Y8Mg_cQw899ILWr21AVn_04jO6iI2RJ9Bkhls5flCuBB6VLiSEAiWiwLtHTwfk0up8KjHjC-HoqFtfBMVNlm2P5M5d_7907RemiDharDJ_59GcAHVKX9CJwVwuo7KInlyF2AlylerW2H7znt7X6fbS0TyxwRbCKoYaFX1CcmD98ONatu_wnm7Pt12_Zk"
-                />
-              </div>
-              <div>
-                <span
-                  class="text-secondary font-label text-[10px] tracking-widest uppercase mb-1 block"
-                  >Tutorials</span
-                >
-                <h4 class="font-headline font-bold text-lg text-on-surface">
-                  The Monospace Manifesto
-                </h4>
-              </div>
-            </div>
-            <div class="glass-card p-6 rounded-3xl flex flex-col gap-4 group">
-              <div class="h-40 rounded-2xl overflow-hidden">
-                <img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  data-alt="macro circuit board photography with glowing neon circuit paths"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Bs9vv69fyE5fmNR8b96dPFVhtot7zg87jjredRFCitSmRX3MF5Ld7t8YKdqpqzBIt53U1-UqZcs5T34Jbzk37uvir44CHln2yv3acYYNvOsyTdsTdUhDXDbIbPWCd5u-XIRYFKH3onBgdI2GCcfHrMg27Agj91sUuVMve-JgExtsINj4klQnV0hTeG2GpikGlSVPASrId2MvVRZH4FIo-wPeZwV429FeW3fIHMhce1tQP6dCiGkrEiQntoDhLYSjA8HAOAshExs"
-                />
-              </div>
-              <div>
-                <span
-                  class="text-tertiary font-label text-[10px] tracking-widest uppercase mb-1 block"
-                  >Labs</span
-                >
-                <h4 class="font-headline font-bold text-lg text-on-surface">
-                  Micro-frontend Refraction
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Newsletter / CTA Submerged -->
-      <section class="mb-12">
-        <div
-          class="glass-card p-12 rounded-[2.5rem] flex flex-col items-center text-center relative overflow-hidden"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-secondary/10 to-primary/5 -z-10"
-          ></div>
-          <div
-            class="w-20 h-20 rounded-full bg-surface-container-highest flex items-center justify-center mb-8 border border-white/10"
-          >
-            <span class="material-symbols-outlined text-4xl text-primary"
-              >mail</span
-            >
-          </div>
-          <h2 class="font-headline text-4xl font-black text-on-surface mb-4">
-            Sync with the Aether
-          </h2>
-          <p class="text-on-surface-variant font-body max-w-md mb-10">
-            Receive weekly transmissions on the evolving state of liquid design
-            and refracted dev tools.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
-            <input
-              class="flex-grow bg-surface-container-low border border-outline-variant/20 rounded-full px-6 py-4 focus:border-primary/50 focus:ring-0 text-on-surface"
-              placeholder="dev@refraction.io"
-              type="email"
-            />
-            <button
-              class="bg-primary text-on-primary font-headline font-bold px-8 py-4 rounded-full hover:bg-primary-dim transition-colors"
-            >
-              Join Pulse
-            </button>
-          </div>
           <p
-            class="mt-6 font-label text-[10px] text-on-surface-variant/40 tracking-widest uppercase"
+            class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/40 mb-2"
           >
-            Decentralized subscription. No tracking. Pure signal.
+            Refraction Score
           </p>
+          <div class="flex items-end gap-2">
+            <span
+              class="text-2xl font-black text-primary leading-none tracking-tighter"
+              >98.4</span
+            >
+            <span class="text-[10px] text-on-surface-variant/60 pb-1"
+              >/100</span
+            >
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </aside>
     <!-- Footer -->
     <footer
-      class="w-full flex flex-col items-center gap-6 px-8 py-12 border-t border-white/5 bg-[#0c141e] font-lexend text-xs uppercase tracking-widest"
+      class="w-full flex flex-col items-center gap-6 px-8 py-12 border-t border-white/5 bg-surface dark:bg-[#080f18]"
     >
-      <div class="flex flex-wrap justify-center gap-12 mb-8">
+      <div class="flex gap-8 mb-4">
         <a
-          class="text-on-surface-variant/40 hover:text-[#ac89ff] hover:tracking-[0.2em] transition-all duration-500"
+          class="font-lexend text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-[#ac89ff] transition-all duration-500 hover:tracking-[0.2em]"
           href="#"
           >Privacy</a
         >
         <a
-          class="text-on-surface-variant/40 hover:text-[#ac89ff] hover:tracking-[0.2em] transition-all duration-500"
+          class="font-lexend text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-[#ac89ff] transition-all duration-500 hover:tracking-[0.2em]"
           href="#"
           >Changelog</a
         >
         <a
-          class="text-on-surface-variant/40 hover:text-[#ac89ff] hover:tracking-[0.2em] transition-all duration-500"
+          class="font-lexend text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-[#ac89ff] transition-all duration-500 hover:tracking-[0.2em]"
           href="#"
           >Contact</a
         >
         <a
-          class="text-on-surface-variant/40 hover:text-[#ac89ff] hover:tracking-[0.2em] transition-all duration-500"
+          class="font-lexend text-xs uppercase tracking-widest text-on-surface-variant/40 hover:text-[#ac89ff] transition-all duration-500 hover:tracking-[0.2em]"
           href="#"
           >Status</a
         >
       </div>
-      <div
-        class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#ac89ff]"
-      >
-        Aether Glass
-      </div>
-      <div class="text-on-surface-variant/40 text-center">
-        © 2024 Aether Glass. Built for the Refracted Developer.
+      <div class="flex items-center gap-4">
+        <span
+          class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#ac89ff] font-lexend"
+          >Aether Glass</span
+        >
+        <div class="w-[1px] h-4 bg-outline-variant/20"></div>
+        <p
+          class="font-lexend text-xs uppercase tracking-widest text-on-surface-variant/40"
+        >
+          © 2024 Built for the Refracted Developer.
+        </p>
       </div>
     </footer>
-    <!-- FAB -->
-    <button
-      class="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-tr from-secondary to-primary shadow-2xl flex items-center justify-center group hover:scale-110 transition-all z-50 overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"
-      ></div>
-      <span
-        class="material-symbols-outlined text-white text-3xl font-bold relative z-10"
-        style="font-variation-settings: 'FILL' 1"
-        >terminal</span
-      >
-    </button>
   </body>
 </html>

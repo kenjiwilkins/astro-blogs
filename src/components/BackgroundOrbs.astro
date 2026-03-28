@@ -1,0 +1,54 @@
+---
+interface Orb {
+  position: string;
+  size: string;
+  color: string;
+  blur: string;
+  animate?: boolean;
+}
+
+interface Props {
+  orbs?: Orb[];
+}
+
+const { orbs } = Astro.props;
+
+const defaultOrbs: Orb[] = [
+  {
+    position: 'top-20 right-[-10%]',
+    size: 'w-[500px] h-[500px]',
+    color: 'bg-primary/10',
+    blur: 'blur-[120px]',
+    animate: true,
+  },
+  {
+    position: 'bottom-20 left-10',
+    size: 'w-[400px] h-[400px]',
+    color: 'bg-secondary/10',
+    blur: 'blur-[100px]',
+  },
+  {
+    position: 'top-[40%] left-[20%]',
+    size: 'w-[300px] h-[300px]',
+    color: 'bg-tertiary/10',
+    blur: 'blur-[80px]',
+  },
+];
+
+const items = orbs ?? defaultOrbs;
+---
+
+{
+  items.map((orb) => (
+    <div
+      class:list={[
+        'absolute rounded-full -z-10',
+        orb.position,
+        orb.size,
+        orb.color,
+        orb.blur,
+        orb.animate && 'animate-pulse',
+      ]}
+    />
+  ))
+}

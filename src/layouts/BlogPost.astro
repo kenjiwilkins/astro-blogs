@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { ChevronsLeft, ChevronsRight, ClipboardCopy } from '@lucide/astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -14,76 +15,254 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
+    <style is:global>
+      @reference "../styles/global.css" --- IGNORE ---
+      .content-wrapper {
+        @apply prose prose-invert max-w-none;
       }
-      .hero-image {
-        width: 100%;
+      /* disable scrollbars */
+      pre::-webkit-scrollbar {
+        display: none;             /* Chrome, Safari用 */
       }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
+      /* Hide scrollbars and scroll rails */
+      .content-wrapper::-webkit-scrollbar {
+        display: none;
       }
-      .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
+      .content-wrapper {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
-      .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        text-align: center;
-        line-height: 1;
+
+      .content-wrapper p {
+        @apply mb-6 text-on-surface/90 leading-relaxed;
       }
-      .title h1 {
-        margin: 0 0 0.5em 0;
+      .content-wrapper h1 {
+        @apply text-4xl font-bold font-headline tracking-tight mb-6 mt-12 text-on-surface;
       }
-      .date {
-        margin-bottom: 0.5em;
-        color: rgb(var(--gray));
+       .content-wrapper h2 {
+        @apply text-3xl font-bold font-headline tracking-tight mb-4 mt-12 text-on-surface;
       }
-      .last-updated-on {
-        font-style: italic;
+       .content-wrapper h3 {
+        @apply text-2xl font-bold font-headline tracking-tight mb-3 mt-10 text-on-surface;
       }
+       .content-wrapper h4 {
+        @apply text-xl font-bold font-headline tracking-tight mb-2 mt-8 text-on-surface;
+      }
+       .content-wrapper h5 {
+        @apply text-lg font-bold font-headline tracking-tight mb-1 mt-6 text-on-surface;
+      }
+       .content-wrapper h6 {
+        @apply text-base font-bold font-headline tracking-tight mb-1 mt-6 text-on-surface;
+      }
+
+      .content-wrapper img {
+        @apply my-8 rounded-lg border border-white/10 shadow-lg;
+      }
+
+      .content-wrapper blockquote {
+        @apply border-l-4 border-primary/30 pl-6 italic text-on-surface-variant/80 my-8;
+      }
+
+      /* tables */
+      .content-wrapper table {
+        @apply w-full border-collapse my-8;
+      }
+      .content-wrapper th, .content-wrapper td {
+        @apply border border-white/10 px-4 py-2 text-on-surface/90;
+      }
+      .content-wrapper th {
+        @apply bg-surface-variant/20 text-on-surface font-bold;
+      }
+
+      /* list */
+      .content-wrapper ul,
+      .content-wrapper ol {
+        @apply list-inside list-disc;
+      }
+        .content-wrapper ol {
+          @apply list-decimal;
+        }
+        .content-wrapper li {
+          @apply mb-2 text-on-surface/90;
+        }
+
+      /* nested list (indent)*/
+      .content-wrapper ul ul,
+      .content-wrapper ul ol,
+      .content-wrapper ol ul,
+      .content-wrapper ol ol {
+        @apply ml-6;
+      }
+
+      .content-wrapper pre {
+        /* Code Snippets */
+        @apply p-6 bg-surface-container-high rounded-lg overflow-x-auto;
+      }
+
+      /* inline-code (inside paragraph)*/
+
+      .content-wrapper > p > code {
+        @apply bg-amber-800/40 text-amber-400/90 px-1 py-0.5 rounded;
+      }
+        
     </style>
   </head>
 
-  <body>
+  <body
+    class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container"
+  >
     <Header />
-    <main>
-      <article>
-        <div class="hero-image">
+    <!-- Main Content Canvas -->
+    <main class="relative pt-32 pb-40 px-6 max-w-7xl mx-auto liquid-mesh">
+      <!-- Post Header Section -->
+      <header class="mb-20 flex flex-col items-center text-center">
+        <div class="flex items-center gap-4 mb-6">
+          <span
+            class="font-label text-xs uppercase tracking-[0.3em] text-secondary py-1 px-3 bg-secondary/10 rounded-full border border-secondary/20"
+            >Engineering</span
+          >
+          <span
+            class="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant/60"
+            >6 MIN READ</span
+          >
+          <div class="w-[1px] h-3 bg-white/10 mx-2"></div>
+          <button
+            class="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group group-active:scale-95"
+          >
+            <ClipboardCopy
+              class="w-4 h-4 text-on-surface-variant/80 group-hover:text-primary transition-colors"
+            />
+            <span
+              class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/80 group-hover:text-primary transition-colors"
+              >RSS</span
+            >
+          </button>
+        </div>
+        <h1
+          class="font-headline text-5xl md:text-7xl font-black text-on-surface tracking-tighter leading-[0.9] max-w-4xl mb-8"
+        >
+          {title}
+          <!-- TDD: make title to accept highlighted text -->
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+          >
+            {null}
+          </span>
+        </h1>
+        <div class="flex items-center gap-6 text-on-surface-variant/80 pb-2">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full overflow-hidden border border-primary/30"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="portrait of a focused software architect with glasses in a dimly lit studio with neon blue accents"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqSerVFLK7PZ7VtPxOQ5NMGMErQV9zz_Av44l5eeOQ6633zv9o_fWUBwq9Ih7_xu6jH8lzMXxaINIPFc4oJWNrc8DtCPBqrNpLIFZPkiKhT5xLP1dzqxQip2UV5Hxkgo_0E6XRsBqX6qSfPnNpmezIj9kpurcMMQcn6sJqDEPk8Tv-X-pnXXNBn0Tz8lwnvGkrz65QEbNMBecHh7GAKxDgjQCCCSUKDcppA5lILsXJTCTKgJYJ5mq3Mf1mns0Vj7tJyPoD_tWFAJs"
+              />
+            </div>
+            <span class="font-label font-bold text-sm tracking-tight"
+              >Kaelen Vance</span
+            >
+          </div>
+          <div class="w-[1px] h-4 bg-outline-variant/30"></div>
+          <FormattedDate date={pubDate} />
           {
-            heroImage && (
-              <Image width={1020} height={510} src={heroImage} alt="" />
+            updatedDate && (
+              <>
+                <div class="w-[1px] h-4 bg-outline-variant/30" />
+                <div class="text-xs font-label text-on-surface-variant/60">
+                  Last updated on <FormattedDate date={updatedDate} />
+                </div>
+              </>
             )
           }
         </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
-            <hr />
+        <!-- Hero Image Section -->
+        {heroImage && (<div class="w-full max-w-5xl mx-auto mb-20 relative group">
+          <div
+            class="absolute -inset-4 bg-gradient-to-r from-primary/10 to-secondary/10 blur-3xl opacity-50"
+          >
           </div>
-          <slot />
+          <div
+            class="relative glass-panel bg-white/5 p-3 rounded-[3rem] shadow-2xl overflow-hidden"
+          >
+            <div
+              class="relative rounded-[2.25rem] overflow-hidden border border-white/10"
+            >
+              <Image 
+                width={1020} 
+                height={510} 
+                src={heroImage} 
+                class="w-full aspect-[21/9] object-cover hover:scale-[1.02] transition-transform duration-1000 ease-out"
+                alt="" />
+              <div
+                class="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[2.25rem] pointer-events-none"
+              >
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"
+              >
+              </div>
+            </div>
+          </div>
+        </div>)}
+      </header>
+      <!-- The Large Translucent Post Panel -->
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <!-- Decorative Blobs behind the panel -->
+        <div
+          class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse"
+        >
         </div>
-      </article>
+        <div
+          class="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/10 rounded-full blur-[120px]"
+        >
+        </div>
+        <article
+          class="glass-panel content-wrapper bg-surface-variant/40 rounded-[2.5rem] p-12 md:p-20 shadow-2xl relative overflow-hidden group"
+        >
+          <slot />
+        </article>
+        <!-- Navigation: Glass-morphic Pagination -->
+                <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <button
+            class="relative group gloss-swipe overflow-hidden text-left glass-panel bg-surface-variant/20 p-8 rounded-3xl hover:bg-surface-variant/40 transition-all duration-500 border border-white/5"
+          >
+            <span
+              class="font-label text-[10px] uppercase tracking-[0.4em] text-secondary mb-4 block"
+              >Previous Article</span
+            >
+            <span
+              class="font-headline text-xl font-bold text-on-surface group-hover:text-primary transition-colors flex items-center gap-4"
+            >
+              <ChevronsLeft class="transition-transform group-hover:-translate-x-2" />
+              Micro-interactions in Liquid Systems
+            </span>
+            <!-- Liquid hover effect element -->
+            <div
+              class="absolute -bottom-10 -right-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"
+            ></div>
+          </button>
+          <button
+            class="relative group gloss-swipe overflow-hidden text-right glass-panel bg-surface-variant/20 p-8 rounded-3xl hover:bg-surface-variant/40 transition-all duration-500 border border-white/5"
+          >
+            <span
+              class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-4 block"
+              >Next Article</span
+            >
+            <span
+              class="font-headline text-xl font-bold text-on-surface group-hover:text-secondary transition-colors flex items-center justify-end gap-4"
+            >
+              The Death of the Card Component
+              <ChevronsRight class="transition-transform group-hover:translate-x-2" />
+            </span>
+            <!-- Liquid hover effect element -->
+            <div
+              class="absolute -top-10 -left-10 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"
+            ></div>
+          </button>
+        </div>
+      </div>
     </main>
     <Footer />
   </body>
