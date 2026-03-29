@@ -3,10 +3,22 @@ import { Rss } from '@lucide/astro';
 ---
 
 <button
+  id="rss-btn-header"
   class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md text-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(0,240,255,0.2)] transition-all group"
 >
   <Rss class="text-sm group-active:scale-90 transition-transform" />
-  <span class="font-label text-[10px] font-bold tracking-[0.2em] uppercase">
+  <span class="font-label text-[10px] font-bold tracking-[0.2em] uppercase rss-label">
     RSS Feed
   </span>
 </button>
+<script>
+  document.getElementById('rss-btn-header')?.addEventListener('click', async () => {
+    const url = new URL('/rss.xml', window.location.origin).href;
+    await navigator.clipboard.writeText(url);
+    const label = document.querySelector('#rss-btn-header .rss-label');
+    if (label) {
+      label.textContent = 'Copied!';
+      setTimeout(() => { label.textContent = 'RSS Feed'; }, 2000);
+    }
+  });
+</script>
