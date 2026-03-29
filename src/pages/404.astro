@@ -1,6 +1,7 @@
 ---
-import { CornerDownLeft, House } from '@lucide/astro';
+import { House } from '@lucide/astro';
 import BaseHead from '../components/BaseHead.astro';
+import GoBackButton from '../components/GoBackButton';
 ---
 
 <!doctype html>
@@ -97,31 +98,8 @@ import BaseHead from '../components/BaseHead.astro';
             >
             </div>
           </a>
-          <!-- Secondary Action: Glass Plate -->
-          <button
-            class="flex items-center gap-2 px-8 py-4 cursor-pointer rounded-full border border-outline-variant/30 text-on-surface font-label text-sm uppercase tracking-widest backdrop-blur-xl bg-surface-container/20 hover:bg-surface-container-high/40 transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50"
-            id="go-back-button"
-            disabled
-          >
-            <CornerDownLeft class="w-5 h-5" />
-            Previous Page
-          </button>
-          <script>
-            document.addEventListener('DOMContentLoaded', () => {
-              const goBackButton = document.getElementById(
-                'go-back-button',
-              ) as HTMLButtonElement | null;
-              if (!goBackButton) return;
-              goBackButton.disabled = false;
-              goBackButton.addEventListener('click', () => {
-                if (window.history.length > 1) {
-                  window.history.back();
-                } else {
-                  window.location.href = '/';
-                }
-              });
-            });
-          </script>
+          <!-- Secondary Action: React Client Island -->
+          <GoBackButton client:load />
         </div>
       </div>
     </main>
