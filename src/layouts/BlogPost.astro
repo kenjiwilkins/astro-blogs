@@ -146,7 +146,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
             class="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant/60"
             >6 MIN READ</span
           >
-          <div class="w-[1px] h-3 bg-white/10 mx-2"></div>
+          <div class="w-px h-3 bg-white/10 mx-2"></div>
           <button
             id="rss-copy-btn"
             class="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-primary/50 hover:bg-primary/5 transition-all group group-active:scale-95"
@@ -177,7 +177,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
           {title}
           <!-- TDD: make title to accept highlighted text -->
           <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+            class="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary"
           >
             {null}
           </span>
@@ -197,12 +197,12 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
               >Kaelen Vance</span
             >
           </div>
-          <div class="w-[1px] h-4 bg-outline-variant/30"></div>
+          <div class="w-px h-4 bg-outline-variant/30"></div>
           <FormattedDate date={pubDate} />
           {
             updatedDate && (
               <>
-                <div class="w-[1px] h-4 bg-outline-variant/30" />
+                <div class="w-px h-4 bg-outline-variant/30" />
                 <div class="text-xs font-label text-on-surface-variant/60">
                   Last updated on <FormattedDate date={updatedDate} />
                 </div>
@@ -213,7 +213,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
         <!-- Hero Image Section -->
         {heroImage && (<div class="w-full max-w-5xl mx-auto mb-20 relative group">
           <div
-            class="absolute -inset-4 bg-gradient-to-r from-primary/10 to-secondary/10 blur-3xl opacity-50"
+            class="absolute -inset-4 bg-linear-to-r from-primary/10 to-secondary/10 blur-3xl opacity-50"
           >
           </div>
           <div
@@ -226,14 +226,14 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
                 width={1020} 
                 height={510} 
                 src={heroImage} 
-                class="w-full aspect-[21/9] object-cover hover:scale-[1.02] transition-transform duration-1000 ease-out"
+                class="w-full aspect-21/9 object-cover hover:scale-[1.02] transition-transform duration-1000 ease-out"
                 alt={title} />
               <div
                 class="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[2.25rem] pointer-events-none"
               >
               </div>
               <div
-                class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"
+                class="absolute inset-0 bg-linear-to-t from-background/40 to-transparent"
               >
               </div>
             </div>
