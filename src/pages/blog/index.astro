@@ -15,7 +15,7 @@ const posts = (await getCollection('blog')).sort(
 );
 
 const allTags = [...new Set(posts.flatMap((p) => p.data.tags))];
-const filters = [
+const filters: { label: string; active?: boolean; href?: string }[] = [
   { label: '#all_entries', active: true },
   ...allTags.map((tag) => ({ label: `#${tag}`, href: `/tags/${tag}/` })),
 ];
