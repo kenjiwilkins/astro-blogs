@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { type CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
+import Tag from './Tag.astro';
 
 type Props = {
   post: CollectionEntry<'blog'>;
@@ -26,11 +27,9 @@ const { post } = Astro.props;
   </div>
   <div class="px-6 pb-8">
     <div class="flex justify-between items-center mb-4">
-      <span
-        class="text-[10px] font-label font-bold text-primary tracking-[0.2em] uppercase"
-      >
-        Engineering
-      </span>
+      <div class="flex flex-wrap gap-1.5">
+        {post.data.tags.map((tag: string) => <Tag tag={tag} />)}
+      </div>
       <FormattedDate date={post.data.pubDate} />
     </div>
     <h3

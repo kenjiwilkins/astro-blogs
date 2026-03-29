@@ -14,12 +14,10 @@ const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))];
 const filters = [
   { label: '#all_entries', active: true },
-  { label: '#rust' },
-  { label: '#brutalist_ui' },
-  { label: '#webgpu' },
-  { label: '#architecture' },
+  ...allTags.map((tag) => ({ label: `#${tag}`, href: `/tags/${tag}/` })),
 ];
 ---
 
@@ -55,7 +53,13 @@ const filters = [
           <div class="flex flex-wrap gap-2 pb-2">
             {
               filters.map((filter) => (
-                <FilterChip label={filter.label} active={filter.active} />
+                filter.href ? (
+                  <a href={filter.href}>
+                    <FilterChip label={filter.label} active={filter.active} />
+                  </a>
+                ) : (
+                  <FilterChip label={filter.label} active={filter.active} />
+                )
               ))
             }
           </div>

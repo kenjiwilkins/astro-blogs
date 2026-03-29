@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = await getCollection('blog');
+
+const tagCountMap = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
+  }
+}
+
+const tags = [...tagCountMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title={`Tags - ${SITE_TITLE}`} description="Browse all tags" />
+  </head>
+  <body
+    class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <Header />
+    <main class="pt-32 pb-20 px-6 max-w-4xl mx-auto">
+      <header class="mb-16 text-center">
+        <span
+          class="font-label text-secondary text-sm font-bold tracking-[0.3em] uppercase mb-4 block"
+          >Browse by</span
+        >
+        <h1
+          class="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-none"
+        >
+          Tags<span class="text-primary">.</span>
+        </h1>
+      </header>
+      <div class="flex flex-wrap justify-center gap-4">
+        {
+          tags.map(([tag, count]) => (
+            <a
+              href={`/tags/${tag}/`}
+              class="group relative glass-panel bg-surface-variant/20 px-6 py-4 rounded-2xl border border-white/5 hover:border-primary/30 hover:bg-surface-variant/40 transition-all duration-300"
+            >
+              <span class="font-label text-sm font-bold text-primary uppercase tracking-[0.15em] group-hover:text-secondary transition-colors">
+                #{tag}
+              </span>
+              <span class="ml-2 text-on-surface-variant/50 text-sm font-label">
+                ({count})
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

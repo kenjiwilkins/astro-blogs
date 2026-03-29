@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import PostCard from '../../components/PostCard.astro';
+import Tag from '../../components/Tag.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = new Set<string>();
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      tags.add(tag);
+    }
+  }
+  return [...tags].map((tag) => ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+const posts = (await getCollection('blog'))
+  .filter((post) => post.data.tags.includes(tag))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allPosts = await getCollection('blog');
+const tagCountMap = new Map<string, number>();
+for (const post of allPosts) {
+  for (const t of post.data.tags) {
+    tagCountMap.set(t, (tagCountMap.get(t) ?? 0) + 1);
+  }
+}
+const allTags = [...tagCountMap.keys()].sort();
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead
+      title={`#${tag} - ${SITE_TITLE}`}
+      description={`Posts tagged with "${tag}"`}
+    />
+  </head>
+  <body
+    class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <Header />
+    <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+      <header class="mb-16 text-center">
+        <span
+          class="font-label text-secondary text-sm font-bold tracking-[0.3em] uppercase mb-4 block"
+          >Tagged</span
+        >
+        <h1
+          class="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-none mb-6"
+        >
+          <span class="text-primary">#</span>{tag}
+        </h1>
+        <p class="text-on-surface-variant/60 font-label text-sm">
+          {posts.length} post{posts.length !== 1 && 's'}
+        </p>
+      </header>
+      <!-- Tag cloud -->
+      <div class="flex flex-wrap justify-center gap-2 mb-16">
+        {
+          allTags.map((t) => (
+            <a
+              href={`/tags/${t}/`}
+              class:list={[
+                'px-4 py-1.5 rounded-full border text-xs font-label font-bold tracking-[0.15em] uppercase transition-all',
+                t === tag
+                  ? 'border-primary/40 bg-primary/10 text-primary shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                  : 'border-white/5 bg-surface-container text-on-surface-variant hover:border-secondary/50 hover:text-secondary',
+              ]}
+            >
+              #{t}
+            </a>
+          ))
+        }
+      </div>
+      <!-- Posts grid -->
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+      >
+        {posts.map((post) => <PostCard post={post} />)}
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

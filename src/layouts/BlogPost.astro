@@ -6,13 +6,14 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Tag from '../components/Tag.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   prevPost: CollectionEntry<'blog'> | null;
   nextPost: CollectionEntry<'blog'> | null;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nextPost } = Astro.props;
 ---
 
 <html lang="en">
@@ -119,11 +120,12 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
     <main class="relative pt-32 pb-40 px-6 max-w-7xl mx-auto liquid-mesh">
       <!-- Post Header Section -->
       <header class="mb-20 flex flex-col items-center text-center">
-        <div class="flex items-center gap-4 mb-6">
-          <span
-            class="font-label text-xs uppercase tracking-[0.3em] text-secondary py-1 px-3 bg-secondary/10 rounded-full border border-secondary/20"
-            >Engineering</span
-          >
+        <div class="flex items-center gap-4 mb-6 flex-wrap justify-center">
+          {tags && tags.length > 0 && (
+            <div class="flex gap-2 flex-wrap">
+              {tags.map((tag: string) => <Tag tag={tag} />)}
+            </div>
+          )}
           <span
             class="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant/60"
             >6 MIN READ</span
