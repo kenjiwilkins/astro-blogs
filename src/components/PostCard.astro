@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { type CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import Tag from './Tag.astro';
+import { ChevronsRight } from '@lucide/astro';
 
 type Props = {
   post: CollectionEntry<'blog'>;
@@ -45,13 +46,15 @@ const { post } = Astro.props;
       )
     }
   </div>
-  <div class="flex items-center justify-between">
+  <div class="flex items-center justify-between p-4">
     <a
       class="text-primary text-xs font-label font-bold flex items-center gap-2 group-hover:translate-x-1 transition-transform"
       href={`/blog/${post.id}/`}
     >
       VIEW CASE STUDY
-      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      <span class="material-symbols-outlined text-sm">
+        <ChevronsRight class="w-4 h-4" />
+      </span>
     </a>
   </div>
 </article>

@@ -15,21 +15,23 @@ const { post } = Astro.props;
 >
   {
     post.data.heroImage && (
-      <div class="h-40 rounded-2xl overflow-hidden">
+      <div class="h-40 rounded-2xl overflow-hidden relative">
         <Image
           alt={post.data.title}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+          class="w-full h-40 object-cover scale-100 group-hover:scale-110 transition-transform duration-700"
           src={post.data.heroImage}
         />
       </div>
     )
   }
   <div>
-    <span
-      class="text-secondary font-label text-[10px] tracking-widest uppercase mb-1 block"
-    >
-      Engineering
-    </span>
+    <div class="flex flex-wrap gap-1.5 mb-1">
+      {post.data.tags.map((tag: string) => (
+        <span class="text-secondary font-label text-[10px] tracking-widest uppercase">
+          {tag}
+        </span>
+      ))}
+    </div>
     <h4 class="font-headline font-bold text-lg text-on-surface">
       {post.data.title}
     </h4>

@@ -10,6 +10,8 @@ import Sidebar from '../components/SideNavigation.astro';
 import TimeSinceMetric from '../components/TimeSinceMetric';
 import TransmissionCard from '../components/TransmissionCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { version } from '../../package.json';
+import { ChevronsRight } from '@lucide/astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -49,7 +51,7 @@ const secondaryPosts = posts.slice(1, 3);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
@@ -72,7 +74,7 @@ const secondaryPosts = posts.slice(1, 3);
           <div class="max-w-4xl relative z-10">
             <span
               class="font-label text-primary font-bold tracking-[0.3em] uppercase mb-6 block"
-              >Refraction Engine v4.0</span
+              >Unworthy Engine v{version}</span
             >
             <h1
               class="font-headline text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-on-surface"
@@ -118,15 +120,13 @@ const secondaryPosts = posts.slice(1, 3);
               Latest Transmissions
             </h2>
             <p class="text-on-surface-variant font-body">
-              Deep dives into the liquid stack
+              時間の浪費へ
             </p>
           </div>
           <button
             class="font-label text-sm text-primary hover:tracking-widest transition-all duration-300 flex items-center gap-2"
           >
-            VIEW ALL <span class="material-symbols-outlined text-sm"
-              >arrow_forward</span
-            >
+            VIEW ALL <ChevronsRight class="w-4 h-4" />
           </button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -146,9 +146,13 @@ const secondaryPosts = posts.slice(1, 3);
                   />
                 )}
                 <div class="absolute bottom-0 left-0 p-10 z-20">
-                  <span class="bg-primary/20 backdrop-blur-md text-primary font-label text-xs px-3 py-1 rounded-full mb-4 inline-block">
-                    ENGINEERING
-                  </span>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {featuredPost.data.tags.map((tag: string) => (
+                      <span class="bg-primary/20 backdrop-blur-md text-primary font-label text-xs px-3 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <h3 class="font-headline text-4xl font-bold text-white mb-4 leading-tight">
                     {featuredPost.data.title}
                   </h3>
@@ -157,7 +161,9 @@ const secondaryPosts = posts.slice(1, 3);
                   </p>
                   <span class="flex items-center gap-3 font-headline font-bold text-white group-hover:gap-5 transition-all">
                     Read transmission{' '}
-                    <span class="material-symbols-outlined">east</span>
+                    <span class="material-symbols-outlined">
+                      <ChevronsRight class="w-5 h-5" />
+                    </span>
                   </span>
                 </div>
               </a>
