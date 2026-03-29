@@ -4,12 +4,13 @@ import BaseHead from '../components/BaseHead.astro';
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="en">
   <head>
     <BaseHead
       title="Page Not Found"
       description="The page you are looking for does not exist."
     />
+    <meta name="robots" content="noindex, follow" />
   </head>
   <body
     class="bg-background text-on-surface font-body overflow-x-hidden selection:bg-primary/30 min-h-screen flex flex-col"
