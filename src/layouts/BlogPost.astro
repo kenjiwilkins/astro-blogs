@@ -160,14 +160,16 @@ const { title, description, pubDate, updatedDate, heroImage, tags, prevPost, nex
             >
           </button>
           <script>
-            document.getElementById('rss-copy-btn')?.addEventListener('click', async () => {
-              const url = new URL('/rss.xml', window.location.origin).href;
-              await navigator.clipboard.writeText(url);
-              const label = document.querySelector('#rss-copy-btn .rss-label');
-              if (label) {
-                label.textContent = 'Copied!';
-                setTimeout(() => { label.textContent = 'RSS'; }, 2000);
-              }
+            document.addEventListener('astro:page-load', () => {
+              document.getElementById('rss-copy-btn')?.addEventListener('click', async () => {
+                const url = new URL('/rss.xml', window.location.origin).href;
+                await navigator.clipboard.writeText(url);
+                const label = document.querySelector('#rss-copy-btn .rss-label');
+                if (label) {
+                  label.textContent = 'Copied!';
+                  setTimeout(() => { label.textContent = 'RSS'; }, 2000);
+                }
+              });
             });
           </script>
         </div>

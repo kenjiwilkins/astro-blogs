@@ -12,13 +12,15 @@ import { Rss } from '@lucide/astro';
   </span>
 </button>
 <script>
-  document.getElementById('rss-btn-header')?.addEventListener('click', async () => {
-    const url = new URL('/rss.xml', window.location.origin).href;
-    await navigator.clipboard.writeText(url);
-    const label = document.querySelector('#rss-btn-header .rss-label');
-    if (label) {
-      label.textContent = 'Copied!';
-      setTimeout(() => { label.textContent = 'RSS Feed'; }, 2000);
-    }
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('rss-btn-header')?.addEventListener('click', async () => {
+      const url = new URL('/rss.xml', window.location.origin).href;
+      await navigator.clipboard.writeText(url);
+      const label = document.querySelector('#rss-btn-header .rss-label');
+      if (label) {
+        label.textContent = 'Copied!';
+        setTimeout(() => { label.textContent = 'RSS Feed'; }, 2000);
+      }
+    });
   });
 </script>
